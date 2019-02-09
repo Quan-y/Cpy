@@ -10,11 +10,16 @@
 #include <deque>
 #include <string>
 #include <map>
+#include <functional>
 //std::vector
 //std::string
 //std::map
 //std::function
 //std::deque
+
+double Calculate(std::function<double(double)> f, double x);
+double TestFun1(double x);
+double TestFun2(double x);
 
 int main() {
     ///////////////////// vector /////////////////////
@@ -145,6 +150,31 @@ int main() {
 //        std::cout << Days[i] << std::endl;
 //    }
     
+    ///////////////////// functional /////////////////////
+    double a = Calculate(TestFun1, 5);
+    double b = Calculate(TestFun1, 10);
+    
+    // lambda function, input: int a, int b output: int
+    std::function<int(int, int)> f = [] (int a, int b) -> int {return(a*b);};
+    int res = f(10, 20);
+    
+    std::cout << "a: " << a << std::endl;
+    std::cout << "b: " << b << std::endl;
+    std::cout << "res: " << res << std::endl;
     
     return 0;
 }
+double Calculate(std::function<double(double)> f, double x){
+    double y = f(x)*f(x)*f(x);
+    return y;
+}
+double TestFun1(double x){
+    return x*x;
+}
+double TestFun2(double x){
+    return x*x - 2*x + 1;
+}
+
+
+
+
